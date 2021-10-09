@@ -12,11 +12,6 @@
     <artifactId>Eureka-Server</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
         <!--  注册中心 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
