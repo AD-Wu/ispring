@@ -18,6 +18,7 @@
         <module>start</module>
         <module>web</module>
         <module>Eureka-Server</module>
+        <module>User-Service</module>
     </modules>
 
     <properties>
