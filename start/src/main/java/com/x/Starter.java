@@ -21,9 +21,6 @@ public abstract class Starter implements CommandLineRunner {
         System.setProperty("java.awt.headless", "false");
     }
 
-    @Value("${server.port}")
-    private int port;
-
     /**
      * 打开浏览器
      *
