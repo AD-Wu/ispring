@@ -1,11 +1,14 @@
+# Eureka服务治理服务器端口必须是8761，否则会一直报connect refuse错误
 server:
-  port: 9090
+  port: 8761
 
 # ---------------------
 # Eureka相关配置
 eureka:
   client:
-    register-with-eureka: false # 是否将该服务注册到服务治理服务器上。本身是服务治理服务器，且尚未构建服务治理集群，故不注册
-    fetch-registry: false # 不需要从服务治理服务器中同步已注册的服务列表数据到本地
+    # 是否将该服务注册到服务治理服务器上。本身是服务治理服务器，且尚未构建服务治理集群，故不注册
+    register-with-eureka: false
+    # 不需要从服务治理服务器中同步已注册的服务列表数据到本地
+    fetch-registry: false
   server:
     wait-time-in-ms-when-sync-empty: 5
