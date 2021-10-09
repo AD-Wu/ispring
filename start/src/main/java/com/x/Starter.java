@@ -1,12 +1,11 @@
-package com.x.web.init;
+package com.x;
 
+import java.awt.Desktop;
+import java.net.URI;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.awt.*;
-import java.net.URI;
 
 /**
  * 启动类
@@ -15,17 +14,16 @@ import java.net.URI;
  * @date 2021/10/8 21:29
  */
 @Log4j2
-@Component
-public class Starter implements CommandLineRunner {
-    
+public abstract class Starter implements CommandLineRunner {
+
     static {
         // Desktop.getDesktop(); 防止报错
         System.setProperty("java.awt.headless", "false");
     }
-    
+
     @Value("${server.port}")
     private int port;
-    
+
     /**
      * 打开浏览器
      *
@@ -35,7 +33,8 @@ public class Starter implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        String url = "http://localhost:" + port + "/api/index.html";
+        // "http://localhost:" + port + "/api/index.html";
+        String url = getBrowseUrl();
         try {
             // 创建一个URI实例
             URI uri = URI.create(url);
@@ -50,7 +49,8 @@ public class Starter implements CommandLineRunner {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
+    public abstract String getBrowseUrl();
 }
