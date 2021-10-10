@@ -15,10 +15,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <modules>
+        <module>data</module>
         <module>start</module>
         <module>web</module>
         <module>Eureka-Server</module>
         <module>User-Service</module>
+        <module>Product-Service</module>
     </modules>
 
     <properties>
@@ -49,6 +51,11 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-test</artifactId>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.x</groupId>
                 <artifactId>start</artifactId>
                 <version>${root.version}</version>
@@ -72,19 +79,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
-            <scope>test</scope>
+            <groupId>com.x</groupId>
+            <artifactId>data</artifactId>
+            <version>${root.version}</version>
         </dependency>
     </dependencies>
 
