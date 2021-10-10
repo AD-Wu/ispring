@@ -1,0 +1,48 @@
+server:
+  port: 3000
+
+# 用户微服务应用名/服务ID
+spring:
+  application:
+    name: product-service
+  jpa:
+    database: h2
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+    datasource:
+      schema: classpath:h2/schema.sql
+      data: classpath:h2/data.sql
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:test
+      username: sa
+      password:
+    # 当需要启动H2控制台时需要开启下面当配置
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
+
+# Eureka相关配置
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      # eureka.client.service-url是map结构，defaultZone是key，可以随意定义
+      defaultZone: http://localhost:8761/eureka
+
+# 日志配置
+logging:
+  file:
+    name: logs/user-service.log  # logs前面没有'/'表示相对路径(当前项目做为根路径)，反之则表示绝对路径
+  level:
+    com:
+      x:
+        user: debug
+    org:
+      springframework: info
+      hibernate: debug
