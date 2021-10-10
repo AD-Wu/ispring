@@ -1,6 +1,6 @@
 package com.x.user.api;
 
-import com.x.user.entity.User;
+import com.x.data.entity.User;
 import com.x.user.service.impl.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

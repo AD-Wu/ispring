@@ -1,6 +1,6 @@
 package com.x.user.service;
 
-import com.x.user.entity.User;
+import com.x.data.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -1,7 +1,7 @@
 package com.x.user.service.impl;
 
+import com.x.data.entity.User;
 import com.x.user.dao.IUserDao;
-import com.x.user.entity.User;
 import com.x.user.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
