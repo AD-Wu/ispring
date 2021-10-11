@@ -1,12 +1,16 @@
 package com.x.product.api;
 
+import com.google.common.collect.Collections2;
 import com.netflix.discovery.converters.Auto;
+import com.x.data.dto.ProductCommentDto;
 import com.x.data.entity.Product;
 import com.x.data.entity.ProductComment;
+import com.x.data.entity.User;
 import com.x.product.dao.IProductCommentDao;
 import com.x.product.dao.IProductDao;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.internal.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
@@ -19,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -39,7 +44,7 @@ public class ProductController {
     private IProductCommentDao productCommentDao;
     
     @Autowired
-    private RestTemplate http;
+    private RestTemplate restTemplate;
     
     /**
      * 获取商品列表
@@ -66,16 +71,31 @@ public class ProductController {
     }
     
     @GetMapping("/{id}/comments")
-    public List<ProductComment> comments(@PathVariable Long id) {
-        ProductComment pc = new ProductComment();
-        pc.setProductId(id);
-        Example<ProductComment> where = Example.of(pc);
-        Sort.TypedSort<LocalDateTime> sort = Sort.sort(ProductComment.class).by(ProductComment::getCreated);
-        List<ProductComment> pcs = productCommentDao.findAll(where, sort);
-        if(pcs!=null&&!pcs.isEmpty()){
+    public List<ProductCommentDto> comments(@PathVariable Long id) {
         
+        List<ProductComment> pcs = productCommentDao.findByProductIdOrderByCreated(id);
+        if (pcs != null && !pcs.isEmpty()) {
+            for (ProductComment pc : pcs) {
+                ProductCommentDto pcd = new ProductCommentDto();
+                pcd.setId(pc.getId());
+                pcd.setContent(pc.getContent());
+                pcd.setCreated(pc.getCreated());
+                pcd.setProduct(getProduct(pc.getProductId()));
+                pcd.setAuthor(getAuthor(pc.getAuthorId()));
+            }
         }
-        return null;
+        return Collections.emptyList();
+    }
+    
+    private Product getProduct(Long productId) {
+        Product product = productDao.findById(productId).get();
+        return product;
+    }
+    
+    private User getAuthor(Long authorId) {
+        User user = restTemplate.getForEntity("http://user-service/users/{id}", User.class, authorId).getBody();
+        log.info("获取用户:{}", user);
+        return user;
     }
     
 }
