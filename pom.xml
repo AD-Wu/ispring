@@ -16,6 +16,7 @@
 
     <modules>
         <module>data</module>
+        <module>util</module>
         <module>start</module>
         <module>web</module>
         <module>Eureka-Server</module>
@@ -28,6 +29,7 @@
         <starter-class>com.x.App</starter-class>
         <java.version>1.8</java.version>
         <guava.version>31.0.1-jre</guava.version>
+        <hutool.version>4.6.10</hutool.version>
     </properties>
 
 
@@ -61,6 +63,16 @@
                 <version>${root.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>data</artifactId>
+                <version>${root.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.x</groupId>
+                <artifactId>util</artifactId>
+                <version>${root.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
@@ -70,6 +82,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
             <!-- 使用H2内存数据库 -->
             <dependency>
@@ -84,11 +101,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.x</groupId>
-            <artifactId>data</artifactId>
-            <version>${root.version}</version>
         </dependency>
     </dependencies>
 
