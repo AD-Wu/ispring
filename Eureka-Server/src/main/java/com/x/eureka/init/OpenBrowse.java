@@ -19,8 +19,8 @@ public class OpenBrowse extends Starter {
     private int port;
 
     @Override
-    public String getBrowseUrl() {
-        return "http://localhost:" + port;
+    public String[] getBrowseUrl() {
+        return new String[]{"http://localhost:" + port};
     }
 
 }
