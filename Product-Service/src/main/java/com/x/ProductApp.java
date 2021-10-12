@@ -1,4 +1,4 @@
-package com.x.product;
+package com.x;
 
 /**
  * TODO
