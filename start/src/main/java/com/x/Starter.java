@@ -31,23 +31,25 @@ public abstract class Starter implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // "http://localhost:" + port + "/api/index.html";
-        String url = getBrowseUrl();
-        try {
-            // 创建一个URI实例
-            URI uri = URI.create(url);
-            // 获取当前系统桌面扩展
-            Desktop desktop = Desktop.getDesktop();
-            // 判断系统桌面是否支持要执行的功能
-            if (desktop.isSupported(Desktop.Action.BROWSE)) {
-                // 获取系统默认浏览器打开链接
-                desktop.browse(uri);
-                log.info("打开路径:{}", url);
+        String[] urls = getBrowseUrl();
+        for (String url : urls) {
+            try {
+                // 创建一个URI实例
+                URI uri = URI.create(url);
+                // 获取当前系统桌面扩展
+                Desktop desktop = Desktop.getDesktop();
+                // 判断系统桌面是否支持要执行的功能
+                if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                    // 获取系统默认浏览器打开链接
+                    desktop.browse(uri);
+                    log.info("打开路径:{}", url);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
     }
 
-    public abstract String getBrowseUrl();
+    public abstract String[] getBrowseUrl();
 }
