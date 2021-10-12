@@ -6,8 +6,12 @@ import com.x.data.entity.ProductComment;
 import com.x.data.entity.User;
 import com.x.product.dao.IProductCommentDao;
 import com.x.product.dao.IProductDao;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.x.product.service.IUserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +39,9 @@ public class ProductController {
 
     @Autowired
     private RestTemplate restTemplate;
+    
+    @Autowired
+    private IUserService userService;
 
     /**
      * 获取商品列表
@@ -70,14 +77,17 @@ public class ProductController {
 
         List<ProductComment> pcs = productCommentDao.findByProductIdOrderByCreated(id);
         if (pcs != null && !pcs.isEmpty()) {
+            List<ProductCommentDto> pcds = new ArrayList<>();
             for (ProductComment pc : pcs) {
                 ProductCommentDto pcd = new ProductCommentDto();
                 pcd.setId(pc.getId());
                 pcd.setContent(pc.getContent());
                 pcd.setCreated(pc.getCreated());
                 pcd.setProduct(getProduct(pc.getProductId()));
-                pcd.setAuthor(getAuthor(pc.getAuthorId()));
+                pcd.setAuthor(getUser(pc.getAuthorId()));
+                pcds.add(pcd);
             }
+            return pcds;
         }
         return Collections.emptyList();
     }
@@ -85,6 +95,11 @@ public class ProductController {
     private Product getProduct(Long productId) {
         Product product = productDao.findById(productId).get();
         return product;
+    }
+    
+    private User getUser(Long userId){
+        User user = userService.detail(userId);
+        return user;
     }
 
     private User getAuthor(Long authorId) {

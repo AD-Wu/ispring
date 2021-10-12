@@ -1,6 +1,7 @@
 package com.x.user.api;
 
 import com.x.data.entity.User;
+import com.x.user.service.IUserService;
 import com.x.user.service.impl.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,7 +26,7 @@ public class UserController {
     private static final Logger LOG = LogManager.getLogger(UserController.class);
     
     @Autowired
-    private UserService userService;
+    private IUserService userService;
     
     /**
      * 获取指定页所有用户

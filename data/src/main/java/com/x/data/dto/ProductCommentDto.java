@@ -15,7 +15,10 @@ import lombok.Data;
  */
 @Data
 public class ProductCommentDto {
-
+    
+    /**
+     * 主键
+     */
     private Long id;
 
     /**
