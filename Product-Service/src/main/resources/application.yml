@@ -1,5 +1,5 @@
 server:
-  port: 3000
+  port: 4000
 
 # 用户微服务应用名/服务ID
 spring:
