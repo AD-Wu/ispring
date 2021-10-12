@@ -5,6 +5,7 @@ import org.apache.http.config.SocketConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -23,8 +24,9 @@ import java.util.Collections;
  */
 @Configuration
 public class RestTemplateConfig {
-    
+
     @Bean
+    // @LoadBalanced
     public RestTemplate restTemplate(){
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         //tcp socket通信的一些配置
@@ -33,7 +35,7 @@ public class RestTemplateConfig {
         connectionManager.setDefaultMaxPerRoute(100);
         //连接总数 默认值20
         connectionManager.setMaxTotal(300);
-    
+
         RequestConfig config = RequestConfig.custom()
                 //建立连接超时
                 .setConnectTimeout(90 * 1000)
@@ -49,7 +51,7 @@ public class RestTemplateConfig {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(Collections.singletonList(new MediaType("text", "json")));
         converter.setSupportedMediaTypes(Collections.singletonList(new MediaType("application", "json")));
-    
+
         restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
         restTemplate.getMessageConverters().add(converter);
         return restTemplate;
