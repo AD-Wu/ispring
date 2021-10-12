@@ -22,6 +22,7 @@
         <module>Eureka-Server</module>
         <module>User-Service</module>
         <module>Product-Service</module>
+        <module>admin-server</module>
     </modules>
 
     <properties>
@@ -56,6 +57,11 @@
             <dependency>
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring.boot.admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
                 <version>${spring.boot.admin.version}</version>
             </dependency>
             <dependency>
@@ -124,7 +130,7 @@
                 <plugin>
                     <groupId>com.github.shalousun</groupId>
                     <artifactId>smart-doc-maven-plugin</artifactId>
-                    <version>2.2.4.1</version>
+                    <version>2.2.8</version>
                     <configuration>
                         <!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
                         <configFile>./src/main/resources/smart-doc.json</configFile>

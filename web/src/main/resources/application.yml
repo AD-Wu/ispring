@@ -4,7 +4,7 @@ spring:
     active: dev
 # 服务器端口
 server:
-  port: 8080
+  port: 7070
 # 日志配置
 logging:
   file:
@@ -16,3 +16,4 @@ logging:
     org:
       springframework: info
       hibernate: debug
+

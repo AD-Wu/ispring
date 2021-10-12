@@ -17,3 +17,16 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  application:
+    name: admin-client
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
