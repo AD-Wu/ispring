@@ -22,12 +22,9 @@ public class OpenBrowse extends Starter {
     @Value("${server.port}")
     private int port;
 
-    @Value("${spring.boot.admin.client.url}")
-    private String adminServerUrl;
-
     @Override
     public String[] getBrowseUrl() {
-        return new String[]{"http://localhost:" + port + "/api/index.html", adminServerUrl};
+        return new String[]{"http://localhost:" + port + "/api/index.html"};
     }
 
 }
