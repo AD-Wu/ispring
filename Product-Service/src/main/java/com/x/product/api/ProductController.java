@@ -1,30 +1,20 @@
 package com.x.product.api;
 
-import com.google.common.collect.Collections2;
-import com.netflix.discovery.converters.Auto;
 import com.x.data.dto.ProductCommentDto;
 import com.x.data.entity.Product;
 import com.x.data.entity.ProductComment;
 import com.x.data.entity.User;
 import com.x.product.dao.IProductCommentDao;
 import com.x.product.dao.IProductDao;
+import java.util.Collections;
+import java.util.List;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang.StringUtils;
-import org.hibernate.internal.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * TODO
@@ -36,16 +26,16 @@ import java.util.Optional;
 @RestController
 @RequestMapping("products")
 public class ProductController {
-    
+
     @Autowired
     private IProductDao productDao;
-    
+
     @Autowired
     private IProductCommentDao productCommentDao;
-    
+
     @Autowired
     private RestTemplate restTemplate;
-    
+
     /**
      * 获取商品列表
      *
@@ -56,7 +46,7 @@ public class ProductController {
         List<Product> products = productDao.findAll();
         return products;
     }
-    
+
     /**
      * 获取商品详情
      *
@@ -69,10 +59,10 @@ public class ProductController {
         Product product = productDao.findById(id).get();
         return product;
     }
-    
+
     @GetMapping("/{id}/comments")
     public List<ProductCommentDto> comments(@PathVariable Long id) {
-        
+
         List<ProductComment> pcs = productCommentDao.findByProductIdOrderByCreated(id);
         if (pcs != null && !pcs.isEmpty()) {
             for (ProductComment pc : pcs) {
@@ -86,16 +76,16 @@ public class ProductController {
         }
         return Collections.emptyList();
     }
-    
+
     private Product getProduct(Long productId) {
         Product product = productDao.findById(productId).get();
         return product;
     }
-    
+
     private User getAuthor(Long authorId) {
         User user = restTemplate.getForEntity("http://user-service/users/{id}", User.class, authorId).getBody();
         log.info("获取用户:{}", user);
         return user;
     }
-    
+
 }
