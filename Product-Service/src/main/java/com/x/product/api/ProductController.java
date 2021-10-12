@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * TODO
+ * 商品接口
  *
  * @author AD
  * @date 2021/10/10 23:17
@@ -51,7 +51,6 @@ public class ProductController {
      * 获取商品详情
      *
      * @param id 商品ID
-     *
      * @return 商品
      */
     @GetMapping("/{id}")
@@ -60,6 +59,12 @@ public class ProductController {
         return product;
     }
 
+    /**
+     * 获取商品评论信息
+     *
+     * @param id 商品ID
+     * @return
+     */
     @GetMapping("/{id}/comments")
     public List<ProductCommentDto> comments(@PathVariable Long id) {
 
