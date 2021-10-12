@@ -66,7 +66,7 @@ public class ProductController {
      * @return
      */
     @GetMapping("/{id}/comments")
-    public List<ProductCommentDto> comments(@PathVariable Long id) {
+    public List<ProductCommentDto> comments(@PathVariable Long id) throws Exception{
 
         List<ProductComment> pcs = productCommentDao.findByProductIdOrderByCreated(id);
         if (pcs != null && !pcs.isEmpty()) {
