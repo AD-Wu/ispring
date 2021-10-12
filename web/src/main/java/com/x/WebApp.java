@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author
  * @date 2021/10/12 11:46
  */
-// @EnableAdminServer
 @SpringBootApplication
 public class WebApp {
 

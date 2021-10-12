@@ -1,13 +1,9 @@
-package com.x.web.init;
+package com.x.admin.server.init;
 
 import com.x.Starter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.awt.*;
-import java.net.URI;
 
 /**
  * 启动类
@@ -22,12 +18,9 @@ public class OpenBrowse extends Starter {
     @Value("${server.port}")
     private int port;
 
-    @Value("${spring.boot.admin.client.url}")
-    private String adminServerUrl;
-
     @Override
     public String[] getBrowseUrl() {
-        return new String[]{"http://localhost:" + port + "/api/index.html", adminServerUrl};
+        return new String[]{"http://localhost:" + port};
     }
 
 }

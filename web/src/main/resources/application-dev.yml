@@ -17,6 +17,7 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  # spring-boot-admin配置
   application:
     name: admin-client
   boot:
@@ -24,9 +25,22 @@ spring:
       client:
         url: http://localhost:9090
 
+# spring-boot-admin配置
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+
+# 日志配置
+logging:
+  file:
+    name: logs/web.log  # logs前面没有'/'表示相对路径(当前项目做为根路径)，反之则表示绝对路径
+  level:
+    com:
+      x:
+        web: debug
+    org:
+      springframework: info
+      hibernate: debug
 

@@ -5,15 +5,5 @@ spring:
 # 服务器端口
 server:
   port: 7070
-# 日志配置
-logging:
-  file:
-    name: logs/web.log  # logs前面没有'/'表示相对路径(当前项目做为根路径)，反之则表示绝对路径
-  level:
-    com:
-      x:
-        web: debug
-    org:
-      springframework: info
-      hibernate: debug
+
 
