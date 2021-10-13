@@ -2,6 +2,8 @@ package com.x;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * TODO
@@ -9,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author AD
  * @date 2021/10/10 23:08
  */
+@EnableFeignClients
+@EnableDiscoveryClient
 @SpringBootApplication
 public class ProductApp {
 

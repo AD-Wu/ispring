@@ -1,8 +1,8 @@
 server:
   port: 2000
 
-# 用户微服务应用名/服务ID
 spring:
+  # 用户微服务应用名/服务ID
   application:
     name: user-service
   jpa:
@@ -23,6 +23,7 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
 
 # Eureka相关配置
 eureka:
